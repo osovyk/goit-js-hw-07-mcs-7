@@ -1,3 +1,5 @@
+import { applyStyles } from './utils.js';
+
 const images = [
     {
         url: 'https://images.pexels.com/photos/140134/pexels-photo-140134.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
@@ -30,27 +32,44 @@ const images = [
 
 const gallery = document.querySelector('ul.gallery');
 
-gallery.style.display = "flex";
-gallery.style.flexWrap = "wrap";
-gallery.style.alignItems = "center";
-gallery.style.justifyContent = "space-between";
-gallery.style.listStyle = "none";
-gallery.style.width = "1128px";
-gallery.style.margin = "0 auto";
-gallery.style.padding = "0";
-gallery.style.rowGap = "48px";
-gallery.style.colunmGap = "24px";
-
 gallery.insertAdjacentHTML(
-    'beforeend',
-    images.map(({url, alt}) =>
-        `<li style="
-            margin: 0; 
-            padding: 0; 
-            width: 360px;
-            height: 300px;">
-            <img src="${url}" alt="${alt}" style="display: block; width: 100%; height: 100%; object-fit: cover;">
+  'beforeend',
+  images.map(({ url, alt }) =>
+    `<li class="gallery-item">
+            <img src="${url}" alt="${alt}">
         </li>`
-    ).join('')
+  ).join('')
 );
 
+
+applyStyles(gallery, {
+    display: 'flex',
+    flexWrap: 'wrap',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    listStyle: 'none',
+    width: '1128px',
+    margin: '0 auto',
+    padding: '0',
+    rowGap: '48px',
+    columnGap: '24px',
+});
+
+const galleryItems = document.querySelectorAll('.gallery-item');
+
+galleryItems.forEach(item => {
+    applyStyles(item, {
+        margin: '0',
+        padding: '0',
+        width: '360px',
+        height: '300px',
+    });
+
+    const img = item.querySelector('img');
+    applyStyles(img, {
+        display: 'block',
+        width: '100%',
+        height: '100%',
+        objectFit: 'cover',
+    });
+});
