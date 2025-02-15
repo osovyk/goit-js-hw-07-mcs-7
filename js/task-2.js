@@ -35,9 +35,11 @@ gallery.style.flexWrap = "wrap";
 gallery.style.alignItems = "center";
 gallery.style.justifyContent = "space-between";
 gallery.style.listStyle = "none";
-gallery.style.width = "100%";
-gallery.style.overflowX = "hidden";
+gallery.style.width = "1128px";
+gallery.style.margin = "0 auto";
 gallery.style.padding = "0";
+gallery.style.rowGap = "48px";
+gallery.style.colunmGap = "24px";
 
 gallery.insertAdjacentHTML(
     'beforeend',
@@ -45,12 +47,9 @@ gallery.insertAdjacentHTML(
         `<li style="
             margin: 0; 
             padding: 0; 
-            width: 32%;
-            height: auto;
-            display: flex;
-            justify-content: center;
-            align-items: center;">
-            <img src="${url}" alt="${alt}" style="display: block; width: 100%; height: auto; object-fit: cover;">
+            width: 360px;
+            height: 300px;">
+            <img src="${url}" alt="${alt}" style="display: block; width: 100%; height: 100%; object-fit: cover;">
         </li>`
     ).join('')
 );
