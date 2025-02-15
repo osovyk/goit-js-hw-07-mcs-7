@@ -19,15 +19,17 @@ refs.createBtn.addEventListener('click', handleCreateBoxes);
 refs.destroyBtn.addEventListener('click', destroyBoxes);
 
 function createBoxes(amount) {
-    const boxes = [];
+    const fragment = document.createDocumentFragment();
+
     for (let i = 0; i < amount; i += 1) {
         const div = document.createElement('div');
         div.style.width = `${30 + i * 10}px`;
         div.style.height = `${30 + i * 10}px`;
         div.style.backgroundColor = getRandomHexColor();
-        boxes.push(div);
+        fragment.appendChild(div);
     }
-    return boxes;
+
+    return fragment;
 }
 
 function destroyBoxes() {
@@ -35,15 +37,17 @@ function destroyBoxes() {
 }
 
 function handleCreateBoxes() {
-    const amount = refs.input.value;
-    if (amount < 1 || amount > 100 || !amount) {
+    const amount = Number(refs.input.value);
+    if (amount < 1 || amount > 100 || isNaN(amount)) {
         alert('Число має бути в межах від 1 до 100 включно');
         return;
     }
-    const boxes = createBoxes(amount);
-    refs.boxes.append(...boxes);
+
+    const fragment = createBoxes(amount);
+    refs.boxes.appendChild(fragment);
     refs.input.value = '';
 }
+
 
 applyStyles(refs.widget, {
     display: 'flex',
